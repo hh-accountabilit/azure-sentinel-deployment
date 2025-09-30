@@ -1,0 +1,57 @@
+{
+  "parameterGroups": [
+    {
+      "name": "Workspace Configuration",
+      "parameters": [
+        "location",
+        "retentionInDays",
+        "pricingTier"
+      ]
+    },
+    {
+      "name": "Enable Data Connectors",
+      "parameters": [
+        "enableDataConnectors"
+      ],
+      "control": "multi-select-dropdown",
+      "options": [
+        "AzureActivityLog",
+        "SecurityInsightsSecurityEventCollectionConfiguration",
+        "WindowsFirewall",
+        "DnsAnalytics"
+      ]
+    },
+    {
+      "name": "Enable Content Hub Solutions",
+      "parameters": [
+        "enableSolutions1P",
+        "enableSolutionsEssentials",
+        "enableSolutionsTraining"
+      ],
+      "control": "multi-select-dropdown",
+      "options": {
+        "enableSolutions1P": [
+          "MicrosoftThreatProtection",
+          "MicrosoftCloudAppSecurity",
+          "MicrosoftDefenderForIdentity"
+        ],
+        "enableSolutionsEssentials": [
+          "EssentialsNetwork",
+          "EssentialsIdentity",
+          "EssentialsData"
+        ],
+        "enableSolutionsTraining": [
+          "TrainingSimulatedThreats",
+          "TrainingHoneypots"
+        ]
+      }
+    },
+    {
+      "name": "Other Options",
+      "parameters": [
+        "enableUEBA"
+      ],
+      "control": "checkbox"
+    }
+  ]
+}
