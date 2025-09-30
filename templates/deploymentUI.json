@@ -115,7 +115,6 @@
     "parameters": {
       "location": {},
       "pricingTier": {},
-      "capacityReservation": {},
       "dailyQuota": {},
       "dataRetention": {},
       "enableDataConnectors": {},
@@ -161,25 +160,7 @@
               ]
             }
           },
-          {
-            "name": "capacityReservation",
-            "type": "Microsoft.Common.DropDown",
-            "label": "Capacity Reservation",
-            "defaultValue": 100,
-            "constraints": {
-              "allowedValues": [
-                100,
-                200,
-                300,
-                400,
-                500,
-                1000,
-                2000,
-                5000
-              ]
-            }
-          },
-          {
+         {
             "name": "dailyQuota",
             "type": "Microsoft.Common.TextBox",
             "label": "Daily Ingestion Quota (GB)"
@@ -197,7 +178,7 @@
           }
         ]
       },
-      {
+    {
         "name": "dataConnectors",
         "label": "Data Connectors",
         "elements": [
@@ -265,43 +246,43 @@
           }
         ]
       },
-{
-  "name": "contentHubSolutions",
-  "label": "Content Hub Solutions",
-  "elements": [
-    {
-      "name": "enableSolutionsTraining",
-      "type": "Microsoft.Common.DropDown",
-      "label": "Training Solutions to Deploy",
-      "multiselect": true,
-      "filter": true,
-      "filterPlaceholder": "Filter training solutions...",
-      "defaultValue": [],
-      "constraints": {
-        "allowedValues": [
-          { "label": "SOC Training Pack", "value": "SOCTP" },
-          { "label": "Threat Hunting", "value": "ThreatHunting" },
-          { "label": "Incident Response", "value": "IncidentResponse" }
+      {
+        "name": "contentHubSolutions",
+        "label": "Content Hub Solutions",
+        "elements": [
+          {
+            "name": "enableSolutionsTraining",
+            "type": "Microsoft.Common.DropDown",
+            "label": "Training Solutions to Deploy",
+            "multiselect": true,
+            "filter": true,
+            "filterPlaceholder": "Filter training solutions...",
+            "defaultValue": [],
+            "constraints": {
+              "allowedValues": [
+                { "label": "SOC Training Pack", "value": "SOCTP" },
+                { "label": "Threat Hunting", "value": "ThreatHunting" },
+                { "label": "Incident Response", "value": "IncidentResponse" }
+              ]
+            }
+          },
+          {
+            "name": "enableSolutionsEssentials",
+            "type": "Microsoft.Common.DropDown",
+            "label": "Essentials Solutions to Deploy",
+            "multiselect": true,
+            "filter": true,
+            "filterPlaceholder": "Filter essentials solutions...",
+            "defaultValue": [],
+            "constraints": {
+              "allowedValues": [
+                { "label": "Azure Essentials Pack", "value": "AzureEssentials" },
+                { "label": "Security Essentials", "value": "SecurityEssentials" }
+              ]
+            }
+          }
         ]
-      }
-    },
-    {
-      "name": "enableSolutionsEssentials",
-      "type": "Microsoft.Common.DropDown",
-      "label": "Essentials Solutions to Deploy",
-      "multiselect": true,
-      "filter": true,
-      "filterPlaceholder": "Filter essentials solutions...",
-      "defaultValue": [],
-      "constraints": {
-        "allowedValues": [
-          { "label": "Azure Essentials Pack", "value": "AzureEssentials" },
-          { "label": "Security Essentials", "value": "SecurityEssentials" }
-        ]
-      }
-    }
-  ]
-},
+      },
       {
         "name": "vmSettings",
         "label": "Virtual Machine Settings",
