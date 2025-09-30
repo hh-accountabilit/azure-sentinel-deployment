@@ -89,37 +89,153 @@
       "metadata": {
         "description": "Enable UEBA (User and Entity Behavior Analytics)."
       }
-    },
-    "metadata": {
-      "parameterGroups": [
-        {
-          "name": "Workspace Configuration",
-          "parameters": [
-            "location",
-            "retentionInDays",
-            "pricingTier"
-          ]
-        },
-        {
-          "name": "Enable Data Connectors",
-          "parameters": [
-            "enableDataConnectors"
-          ]
-        },
-        {
-          "name": "Enable Content Hub Solutions",
-          "parameters": [
-            "enableSolutions1P",
-            "enableSolutionsEssentials",
-            "enableSolutionsTraining"
-          ]
-        },
-        {
-          "name": "Other Options",
-          "parameters": [
-            "enableUEBA"
-          ]
-        }
-      ]
     }
   },
+  "metadata": {
+    "parameterGroups": [
+      {
+        "name": "Workspace Configuration",
+        "parameters": [
+          "location",
+          "retentionInDays",
+          "pricingTier"
+        ]
+      },
+      {
+        "name": "Enable Data Connectors",
+        "parameters": [
+          "enableDataConnectors"
+        ]
+      },
+      {
+        "name": "Enable Content Hub Solutions",
+        "parameters": [
+          "enableSolutions1P",
+          "enableSolutionsEssentials",
+          "enableSolutionsTraining"
+        ]
+      },
+      {
+        "name": "Other Options",
+        "parameters": [
+          "enableUEBA"
+        ]
+      }
+    ]
+  },
+  "resources": [
+    {
+      "name": "logAnalyticsDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/logAnalytics.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "retentionInDays": {
+            "value": "[parameters('retentionInDays')]"
+          },
+          "pricingTier": {
+            "value": "[parameters('pricingTier')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "sentinelDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "dependsOn": [
+        "logAnalyticsDeployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/sentinel.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "workspaceName": {
+            "value": "[reference('logAnalyticsDeployment').outputs.workspaceName.value]"
+          },
+          "retentionInDays": {
+            "value": "[parameters('retentionInDays')]"
+          }
+        }
+      }
+    },
+    {
+      "condition": "[greater(length(parameters('enableDataConnectors')), 0)]",
+      "name": "dataConnectorsDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "dependsOn": [
+        "sentinelDeployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/dataConnectors.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "dataConnectorsKind": {
+            "value": "[parameters('enableDataConnectors')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "vmDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "dependsOn": [
+        "sentinelDeployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/vm.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "defenderDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "dependsOn": [
+        "vmDeployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/defender.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
+      }
+    }
+  ]
+}
