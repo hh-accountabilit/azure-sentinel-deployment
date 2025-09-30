@@ -110,6 +110,16 @@
         "label": "📄 Workspace Configuration",
         "elements": [
           {
+            "type": "info",
+            "label": "Welcome! Use the next page to configure your workspace and data connectors."
+          }
+        ]
+      },
+      {
+        "name": "workspaceAndDataConnectors",
+        "label": "📊 Workspace & Data Connectors",
+        "elements": [
+          {
             "name": "location",
             "type": "dropdown",
             "label": "Location",
@@ -151,13 +161,7 @@
             "minValue": 7,
             "maxValue": 730,
             "toolTip": "How many days to retain logs"
-          }
-        ]
-      },
-      {
-        "name": "dataConnectors",
-        "label": "📊 Data Connectors",
-        "elements": [
+          },
           {
             "name": "enableDataConnectors",
             "type": "dropdown",
