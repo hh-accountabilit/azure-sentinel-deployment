@@ -4,9 +4,7 @@ This repo deploys Log Analytics, Microsoft Sentinel, Defender for Cloud, a sampl
 
 ## 🚀 Deploy to Azure
 
-[![Deploy to Azure(https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhh-accountabilit%2FSentinel-Deployment%2Fmain%2FDeployment%2FazureDeploy.json
-  /createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhh-accountabilit%2FSentinel-Deployment%2Fmain%2FDeployment%2FdeploymentUI.json)]
-
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhh-accountabilit%2FSentinel-Deployment%2Fmain%2FDeployment%2FazureDeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhh-accountabilit%2FSentinel-Deployment%2Fmain%2FDeployment%2FdeploymentUI.json)
 
 > Click the button to deploy the entire environment via the Azure Portal.
 
