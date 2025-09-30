@@ -4,6 +4,32 @@
   "parameters": {
     "location": {
       "type": "string"
+    },
+    "retentionInDays": {
+      "type": "int",
+      "defaultValue": 30,
+      "minValue": 7,
+      "maxValue": 730,
+      "metadata": {
+        "description": "Number of days to retain logs in the workspace."
+      }
+    },
+    "pricingTier": {
+      "type": "string",
+      "defaultValue": "PerGB2018",
+      "allowedValues": [
+        "CapacityReservation",
+        "Free",
+        "LACluster",
+        "PerGB2018",
+        "PerNode",
+        "Premium",
+        "Standalone",
+        "Standard"
+      ],
+      "metadata": {
+        "description": "Pricing tier for the Log Analytics workspace."
+      }
     }
   },
   "resources": [
@@ -14,10 +40,16 @@
       "location": "[parameters('location')]",
       "properties": {
         "sku": {
-          "name": "PerGB2018"
+          "name": "[parameters('pricingTier')]"
         },
-        "retentionInDays": 30
+        "retentionInDays": "[parameters('retentionInDays')]"
       }
     }
-  ]
+  ],
+  "outputs": {
+    "workspaceName": {
+      "type": "string",
+      "value": "[concat('logAnalyticsWorkspace-', uniqueString(resourceGroup().id))]"
+    }
+  }
 }
