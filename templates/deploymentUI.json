@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/deploymentTemplateUI.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
@@ -55,66 +55,80 @@
       ],
       "metadata": {
         "description": "Select one or more data connectors to enable."
-    }
+      }
     }
   },
   "formDefinition": {
-    "groups": [
+    "name": "RootStep",
+    "label": "Deployment Configuration",
+    "elements": [
       {
-        "name": "workspaceConfig",
-        "label": "Workspace Configuration",
-        "elements": [
-          {
-            "name": "location",
-            "type": "dropdown",
-            "label": "Location",
-            "toolTip": "Azure region for the resources",
-            "defaultValue": "eastus"
-          },
-          {
-            "name": "pricingTier",
-            "type": "dropdown",
-            "label": "Pricing Tier",
-            "toolTip": "Pricing tier for the workspace",
-            "defaultValue": "PerGB2018"
-          },
-          {
-            "name": "retentionInDays",
-            "type": "slider",
-            "label": "Retention Days",
-            "minValue": 7,
-            "maxValue": 730,
-            "defaultValue": 30
-          }
-        ]
+        "name": "location",
+        "type": "dropdown",
+        "label": "Location",
+        "defaultValue": "eastus",
+        "toolTip": "Select the Azure region for deployment",
+        "constraints": {
+          "allowedValues": [
+            "eastus",
+            "westus",
+            "centralus",
+            "westeurope",
+            "northeurope",
+            "southeastasia",
+            "australiaeast"
+          ]
+        }
       },
       {
-        "name": "dataConnectors",
-        "label": "Data Connectors",
-        "elements": [
+        "name": "pricingTier",
+        "type": "dropdown",
+        "label": "Pricing Tier",
+        "defaultValue": "PerGB2018",
+        "toolTip": "Pricing tier for Log Analytics workspace",
+        "constraints": {
+          "allowedValues": [
+            "CapacityReservation",
+            "Free",
+            "LACluster",
+            "PerGB2018",
+            "PerNode",
+            "Premium",
+            "Standalone",
+            "Standard"
+          ]
+        }
+      },
+      {
+        "name": "retentionInDays",
+        "type": "slider",
+        "label": "Retention (Days)",
+        "defaultValue": 30,
+        "minValue": 7,
+        "maxValue": 730,
+        "toolTip": "How many days to retain logs"
+      },
+      {
+        "name": "enableDataConnectors",
+        "type": "checkboxList",
+        "label": "Enable Data Connectors",
+        "toolTip": "Select one or more data connectors",
+        "options": [
           {
-            "name": "enableDataConnectors",
-            "type": "checkboxList",
-            "label": "Enable Data Connectors",
-            "toolTip": "Select data connectors to enable",
-            "options": [
-              {
-                "label": "Azure Activity Log",
-                "value": "AzureActivityLog"
-              },
-              {
-                "label": "Security Insights Event Collection",
-                "value": "SecurityInsightsSecurityEventCollectionConfiguration"
-              },
-              {
-                "label": "Windows Firewall",
-                "value": "WindowsFirewall"
-              },
-              {
-                "label": "DNS Analytics",
-                "value": "DnsAnalytics"
-              }
-            ]
+            "label": "Azure Activity Log",
+            "value": "AzureActivityLog"
+          },
+          {
+            "label": "Security Insights Event Collection",
+            "value": "SecurityInsightsSecurityEventCollectionConfiguration"
+          },
+          {
+            "label": "Windows Firewall",
+            "value": "WindowsFirewall"
+          },
+          {
+            "label": "DNS Analytics",
+            "value": "DnsAnalytics"
           }
         ]
       }
