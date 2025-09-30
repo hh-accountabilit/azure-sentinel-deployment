@@ -36,41 +36,92 @@
       }
     },
     "enableDataConnectors": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "Select data connectors to enable. Possible values: AzureActivityLog, SecurityInsightsSecurityEventCollectionConfiguration, WindowsFirewall, DnsAnalytics."
-      }
+  "type": "array",
+  "defaultValue": [],
+  "allowedValues": [
+    "AzureActivityLog",
+    "SecurityInsightsSecurityEventCollectionConfiguration",
+    "WindowsFirewall",
+    "DnsAnalytics"
+  ],
+  "metadata": {
+    "description": "Select one or more data connectors to enable."
+  }
+},
+"enableSolutions1P": {
+  "type": "array",
+  "defaultValue": [],
+  "allowedValues": [
+    "MicrosoftThreatProtection",
+    "MicrosoftCloudAppSecurity",
+    "MicrosoftDefenderForIdentity"
+  ],
+  "metadata": {
+    "description": "First-party Microsoft solutions for Content Hub."
+  }
+},
+"enableSolutionsEssentials": {
+  "type": "array",
+  "defaultValue": [],
+  "allowedValues": [
+    "EssentialsNetwork",
+    "EssentialsIdentity",
+    "EssentialsData"
+  ],
+  "metadata": {
+    "description": "Essential solution bundles for quick start."
+  }
+},
+"enableSolutionsTraining": {
+  "type": "array",
+  "defaultValue": [],
+  "allowedValues": [
+    "TrainingSimulatedThreats",
+    "TrainingHoneypots"
+  ],
+  "metadata": {
+    "description": "Simulated training environments and scenarios."
+  }
+},
+"enableUEBA": {
+  "type": "bool",
+  "defaultValue": true,
+  "metadata": {
+    "description": "Enable UEBA (User and Entity Behavior Analytics)."
+  }
+},
+  "metadata": {
+  "parameterGroups": [
+    {
+      "name": "Workspace Configuration",
+      "parameters": [
+        "location",
+        "retentionInDays",
+        "pricingTier"
+      ]
     },
-    "enableSolutions1P": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "Select Content Hub 1st party solutions to deploy."
-      }
+    {
+      "name": "Enable Data Connectors",
+      "parameters": [
+        "enableDataConnectors"
+      ]
     },
-    "enableSolutionsEssentials": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "Select Content Hub Essentials solutions to deploy."
-      }
+    {
+      "name": "Enable Content Hub Solutions",
+      "parameters": [
+        "enableSolutions1P",
+        "enableSolutionsEssentials",
+        "enableSolutionsTraining"
+      ]
     },
-    "enableSolutionsTraining": {
-      "type": "array",
-      "defaultValue": [],
-      "metadata": {
-        "description": "Select Content Hub Training solutions to deploy."
-      }
-    },
-    "enableUEBA": {
-      "type": "bool",
-      "defaultValue": true,
-      "metadata": {
-        "description": "Enable User and Entity Behavior Analytics (UEBA)."
-      }
+    {
+      "name": "Other Options",
+      "parameters": [
+        "enableUEBA"
+      ]
     }
-  },
+  ]
+},
   "resources": [
     {
       "name": "logAnalyticsDeployment",
