@@ -222,10 +222,7 @@
             "multiselect": true,
             "filter": true,
             "filterPlaceholder": "Filter log types...",
-            "defaultValue": [
-              { "value": "SignInLogs" },
-              { "value": "AuditLogs" }
-            ],
+            "defaultValue": ["SignInLogs","AuditLogs"],
             "constraints": {
               "allowedValues": [
                 { "label": "Signin Logs", "value": "SignInLogs" },
