@@ -18,7 +18,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "<REPLACE_WITH_RAW_GITHUB_URL>/templates/logAnalytics.json",
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/logAnalytics.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -36,7 +36,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "<REPLACE_WITH_RAW_GITHUB_URL>/templates/sentinel.json",
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/sentinel.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -54,7 +54,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "<REPLACE_WITH_RAW_GITHUB_URL>/templates/vm.json",
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/vm.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -72,7 +72,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "<REPLACE_WITH_RAW_GITHUB_URL>/templates/defender.json",
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/defender.json",
           "contentVersion": "1.0.0.0"
         },
         "paramete
