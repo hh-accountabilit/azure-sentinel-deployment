@@ -676,11 +676,7 @@
       "enableMLAlerts": "[steps('analyticsRules').enableMLAlerts]",
       "enableScheduledAlerts": "[steps('analyticsRules').enableScheduledAlerts]",
       "severityLevels": "[steps('analyticsRules').severityLevels]",
-      "rgName": "[basics('rgName')]",
-      "vmName": "[steps('vmSettings').vmName]",
-      "vmSize": "[steps('vmSettings').vmSize]",
-      "adminPassword": "[steps('vmSettings').adminPassword]",
-      "osDiskSize": "[steps('vmSettings').osDiskSize]"
+      "rgName": "[basics('rgName')]"
          }
     }
 }
