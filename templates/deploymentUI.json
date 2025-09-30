@@ -119,8 +119,6 @@
       "dataRetention": {},
       "enableDataConnectors": {},
       "aadStreams": {},
-      "enableUEBA": {},
-      "identityProviders": {},
       "enableSolutionsTraining": {},
       "enableSolutionsEssentials": {},
       "vmName": {},
