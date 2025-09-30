@@ -1,57 +1,183 @@
 {
-  "parameterGroups": [
-    {
-      "name": "Workspace Configuration",
-      "parameters": [
-        "location",
-        "retentionInDays",
-        "pricingTier"
-      ]
-    },
-    {
-      "name": "Enable Data Connectors",
-      "parameters": [
-        "enableDataConnectors"
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "eastus",
+      "metadata": {
+        "description": "Select the Azure region for deployment."
+      },
+      "allowedValues": [
+        "eastus",
+        "westus",
+        "centralus",
+        "westeurope",
+        "northeurope",
+        "southeastasia",
+        "australiaeast"
       ],
-      "control": "multi-select-dropdown",
-      "options": [
+      "ui": {
+        "label": "Location",
+        "description": "Azure region where resources will be deployed.",
+        "control": "dropdown"
+      }
+    },
+    "pricingTier": {
+      "type": "string",
+      "defaultValue": "PerGB2018",
+      "allowedValues": [
+        "CapacityReservation",
+        "Free",
+        "LACluster",
+        "PerGB2018",
+        "PerNode",
+        "Premium",
+        "Standalone",
+        "Standard"
+      ],
+      "metadata": {
+        "description": "Pricing tier for the Log Analytics workspace."
+      },
+      "ui": {
+        "label": "Pricing Tier",
+        "description": "Choose the pricing tier for the workspace.",
+        "control": "dropdown"
+      }
+    },
+    "retentionInDays": {
+      "type": "int",
+      "defaultValue": 30,
+      "minValue": 7,
+      "maxValue": 730,
+      "metadata": {
+        "description": "Number of days to retain logs."
+      },
+      "ui": {
+        "label": "Retention (Days)",
+        "description": "Retention period for logs (7-730 days).",
+        "control": "slider"
+      }
+    },
+    "enableDataConnectors": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
         "AzureActivityLog",
         "SecurityInsightsSecurityEventCollectionConfiguration",
         "WindowsFirewall",
         "DnsAnalytics"
-      ]
-    },
-    {
-      "name": "Enable Content Hub Solutions",
-      "parameters": [
-        "enableSolutions1P",
-        "enableSolutionsEssentials",
-        "enableSolutionsTraining"
       ],
-      "control": "multi-select-dropdown",
-      "options": {
-        "enableSolutions1P": [
-          "MicrosoftThreatProtection",
-          "MicrosoftCloudAppSecurity",
-          "MicrosoftDefenderForIdentity"
-        ],
-        "enableSolutionsEssentials": [
-          "EssentialsNetwork",
-          "EssentialsIdentity",
-          "EssentialsData"
-        ],
-        "enableSolutionsTraining": [
-          "TrainingSimulatedThreats",
-          "TrainingHoneypots"
-        ]
+      "metadata": {
+        "description": "Select one or more data connectors to enable."
+      },
+      "ui": {
+        "label": "Enable Data Connectors",
+        "description": "Select which data connectors to enable.",
+        "control": "multiselect"
       }
     },
-    {
-      "name": "Other Options",
-      "parameters": [
-        "enableUEBA"
+    "enableSolutions1P": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "MicrosoftThreatProtection",
+        "MicrosoftCloudAppSecurity",
+        "MicrosoftDefenderForIdentity"
       ],
-      "control": "checkbox"
+      "metadata": {
+        "description": "First-party Microsoft solutions for Content Hub."
+      },
+      "ui": {
+        "label": "Enable Microsoft Solutions",
+        "description": "Select first-party Microsoft solutions to enable.",
+        "control": "multiselect"
+      }
+    },
+    "enableSolutionsEssentials": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "EssentialsNetwork",
+        "EssentialsIdentity",
+        "EssentialsData"
+      ],
+      "metadata": {
+        "description": "Essential solution bundles for quick start."
+      },
+      "ui": {
+        "label": "Enable Essential Solutions",
+        "description": "Select essential solution bundles to enable.",
+        "control": "multiselect"
+      }
+    },
+    "enableSolutionsTraining": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "TrainingSimulatedThreats",
+        "TrainingHoneypots"
+      ],
+      "metadata": {
+        "description": "Simulated training environments and scenarios."
+      },
+      "ui": {
+        "label": "Enable Training Solutions",
+        "description": "Select training scenarios to enable.",
+        "control": "multiselect"
+      }
+    },
+    "enableUEBA": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Enable UEBA (User and Entity Behavior Analytics)."
+      },
+      "ui": {
+        "label": "Enable UEBA",
+        "description": "Toggle UEBA on or off.",
+        "control": "toggle"
+      }
     }
-  ]
+  },
+  "ui": {
+    "wizardSteps": [
+      {
+        "step": "workspaceConfig",
+        "label": "Workspace Configuration",
+        "description": "Configure workspace location, retention, and pricing.",
+        "elements": [
+          "location",
+          "retentionInDays",
+          "pricingTier"
+        ]
+      },
+      {
+        "step": "dataConnectors",
+        "label": "Data Connectors",
+        "description": "Select data connectors to enable.",
+        "elements": [
+          "enableDataConnectors"
+        ]
+      },
+      {
+        "step": "contentHubSolutions",
+        "label": "Content Hub Solutions",
+        "description": "Enable additional solution bundles.",
+        "elements": [
+          "enableSolutions1P",
+          "enableSolutionsEssentials",
+          "enableSolutionsTraining"
+        ]
+      },
+      {
+        "step": "otherOptions",
+        "label": "Other Options",
+        "description": "Other configuration options.",
+        "elements": [
+          "enableUEBA"
+        ]
+      }
+    ]
+  }
 }
