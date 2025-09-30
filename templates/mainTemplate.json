@@ -75,4 +75,12 @@
           "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/defender.json",
           "contentVersion": "1.0.0.0"
         },
-        "paramete
+        "parameters": {
+      "location": {
+        "value": "[parameters('location')]"
+      }
+    }
+  }
+}
+  ]
+}
