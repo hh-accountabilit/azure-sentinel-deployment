@@ -8,6 +8,67 @@
       "metadata": {
         "description": "Location for all resources."
       }
+    },
+    "pricingTier": {
+      "type": "string",
+      "defaultValue": "PerGB2018",
+      "allowedValues": [
+        "CapacityReservation",
+        "Free",
+        "LACluster",
+        "PerGB2018",
+        "PerNode",
+        "Premium",
+        "Standalone",
+        "Standard"
+      ],
+      "metadata": {
+        "description": "Pricing tier for the Log Analytics workspace."
+      }
+    },
+    "retentionInDays": {
+      "type": "int",
+      "defaultValue": 30,
+      "minValue": 7,
+      "maxValue": 730,
+      "metadata": {
+        "description": "Number of days to retain logs."
+      }
+    },
+    "enableDataConnectors": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Select data connectors to enable. Possible values: AzureActivityLog, SecurityInsightsSecurityEventCollectionConfiguration, WindowsFirewall, DnsAnalytics."
+      }
+    },
+    "enableSolutions1P": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Select Content Hub 1st party solutions to deploy."
+      }
+    },
+    "enableSolutionsEssentials": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Select Content Hub Essentials solutions to deploy."
+      }
+    },
+    "enableSolutionsTraining": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Select Content Hub Training solutions to deploy."
+      }
+    },
+    "enableUEBA": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Enable User and Entity Behavior Analytics (UEBA)."
+      }
     }
   },
   "resources": [
@@ -24,6 +85,12 @@
         "parameters": {
           "location": {
             "value": "[parameters('location')]"
+          },
+          "retentionInDays": {
+            "value": "[parameters('retentionInDays')]"
+          },
+          "pricingTier": {
+            "value": "[parameters('pricingTier')]"
           }
         }
       }
@@ -32,7 +99,9 @@
       "name": "sentinelDeployment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2021-04-01",
-      "dependsOn": ["logAnalyticsDeployment"],
+      "dependsOn": [
+        "logAnalyticsDeployment"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -40,6 +109,36 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "workspaceName": {
+            "value": "[reference('logAnalyticsDeployment').outputs.workspaceName.value]"
+          },
+          "retentionInDays": {
+            "value": "[parameters('retentionInDays')]"
+          }
+        }
+      }
+    },
+    {
+      "condition": "[greater(length(parameters('enableDataConnectors')), 0)]",
+      "name": "dataConnectorsDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "dependsOn": [
+        "sentinelDeployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/dataConnectors.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "dataConnectorsKind": {
+            "value": "[parameters('enableDataConnectors')]"
+          },
           "location": {
             "value": "[parameters('location')]"
           }
@@ -50,7 +149,9 @@
       "name": "vmDeployment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2021-04-01",
-      "dependsOn": ["sentinelDeployment"],
+      "dependsOn": [
+        "sentinelDeployment"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -68,7 +169,9 @@
       "name": "defenderDeployment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2021-04-01",
-      "dependsOn": ["vmDeployment"],
+      "dependsOn": [
+        "vmDeployment"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -76,11 +179,11 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-      "location": {
-        "value": "[parameters('location')]"
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
       }
     }
-  }
-}
   ]
 }
