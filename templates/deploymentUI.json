@@ -283,38 +283,43 @@
           }
         ]
       },
-      {
-        "name": "contentHubSolutions",
-        "label": "Content Hub Solutions",
-        "elements": [
-          {
-            "name": "enableSolutionsTraining",
-            "type": "Microsoft.Common.DropDown",
-            "label": "Training Solutions to Deploy",
-            "multiselect": true,
-            "filter": true,
-            "filterPlaceholder": "Filter training solutions...",
-            "defaultValue": [],
-            "constraints": {
-              "allowedValues": [
-              ]
-            }
-          },
-          {
-            "name": "enableSolutionsEssentials",
-            "type": "Microsoft.Common.DropDown",
-            "label": "Essentials Solutions to Deploy",
-            "multiselect": true,
-            "filter": true,
-            "filterPlaceholder": "Filter essentials solutions...",
-            "defaultValue": [],
-            "constraints": {
-              "allowedValues": [
-              ]
-            }
-          }
+{
+  "name": "contentHubSolutions",
+  "label": "Content Hub Solutions",
+  "elements": [
+    {
+      "name": "enableSolutionsTraining",
+      "type": "Microsoft.Common.DropDown",
+      "label": "Training Solutions to Deploy",
+      "multiselect": true,
+      "filter": true,
+      "filterPlaceholder": "Filter training solutions...",
+      "defaultValue": [],
+      "constraints": {
+        "allowedValues": [
+          { "label": "SOC Training Pack", "value": "SOCTP" },
+          { "label": "Threat Hunting", "value": "ThreatHunting" },
+          { "label": "Incident Response", "value": "IncidentResponse" }
         ]
-      },
+      }
+    },
+    {
+      "name": "enableSolutionsEssentials",
+      "type": "Microsoft.Common.DropDown",
+      "label": "Essentials Solutions to Deploy",
+      "multiselect": true,
+      "filter": true,
+      "filterPlaceholder": "Filter essentials solutions...",
+      "defaultValue": [],
+      "constraints": {
+        "allowedValues": [
+          { "label": "Azure Essentials Pack", "value": "AzureEssentials" },
+          { "label": "Security Essentials", "value": "SecurityEssentials" }
+        ]
+      }
+    }
+  ]
+},
       {
         "name": "vmSettings",
         "label": "Virtual Machine Settings",
