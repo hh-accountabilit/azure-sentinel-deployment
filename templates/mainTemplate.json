@@ -36,92 +36,93 @@
       }
     },
     "enableDataConnectors": {
-  "type": "array",
-  "defaultValue": [],
-  "allowedValues": [
-    "AzureActivityLog",
-    "SecurityInsightsSecurityEventCollectionConfiguration",
-    "WindowsFirewall",
-    "DnsAnalytics"
-  ],
-  "metadata": {
-    "description": "Select one or more data connectors to enable."
-  }
-},
-"enableSolutions1P": {
-  "type": "array",
-  "defaultValue": [],
-  "allowedValues": [
-    "MicrosoftThreatProtection",
-    "MicrosoftCloudAppSecurity",
-    "MicrosoftDefenderForIdentity"
-  ],
-  "metadata": {
-    "description": "First-party Microsoft solutions for Content Hub."
-  }
-},
-"enableSolutionsEssentials": {
-  "type": "array",
-  "defaultValue": [],
-  "allowedValues": [
-    "EssentialsNetwork",
-    "EssentialsIdentity",
-    "EssentialsData"
-  ],
-  "metadata": {
-    "description": "Essential solution bundles for quick start."
-  }
-},
-"enableSolutionsTraining": {
-  "type": "array",
-  "defaultValue": [],
-  "allowedValues": [
-    "TrainingSimulatedThreats",
-    "TrainingHoneypots"
-  ],
-  "metadata": {
-    "description": "Simulated training environments and scenarios."
-  }
-},
-"enableUEBA": {
-  "type": "bool",
-  "defaultValue": true,
-  "metadata": {
-    "description": "Enable UEBA (User and Entity Behavior Analytics)."
-  }
-},
-  "metadata": {
-  "parameterGroups": [
-    {
-      "name": "Workspace Configuration",
-      "parameters": [
-        "location",
-        "retentionInDays",
-        "pricingTier"
-      ]
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "AzureActivityLog",
+        "SecurityInsightsSecurityEventCollectionConfiguration",
+        "WindowsFirewall",
+        "DnsAnalytics"
+      ],
+      "metadata": {
+        "description": "Select one or more data connectors to enable."
+      }
     },
-    {
-      "name": "Enable Data Connectors",
-      "parameters": [
-        "enableDataConnectors"
-      ]
+    "enableSolutions1P": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "MicrosoftThreatProtection",
+        "MicrosoftCloudAppSecurity",
+        "MicrosoftDefenderForIdentity"
+      ],
+      "metadata": {
+        "description": "First-party Microsoft solutions for Content Hub."
+      }
     },
-    {
-      "name": "Enable Content Hub Solutions",
-      "parameters": [
-        "enableSolutions1P",
-        "enableSolutionsEssentials",
-        "enableSolutionsTraining"
-      ]
+    "enableSolutionsEssentials": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "EssentialsNetwork",
+        "EssentialsIdentity",
+        "EssentialsData"
+      ],
+      "metadata": {
+        "description": "Essential solution bundles for quick start."
+      }
     },
-    {
-      "name": "Other Options",
-      "parameters": [
-        "enableUEBA"
+    "enableSolutionsTraining": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "TrainingSimulatedThreats",
+        "TrainingHoneypots"
+      ],
+      "metadata": {
+        "description": "Simulated training environments and scenarios."
+      }
+    },
+    "enableUEBA": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Enable UEBA (User and Entity Behavior Analytics)."
+      }
+    },
+    "metadata": {
+      "parameterGroups": [
+        {
+          "name": "Workspace Configuration",
+          "parameters": [
+            "location",
+            "retentionInDays",
+            "pricingTier"
+          ]
+        },
+        {
+          "name": "Enable Data Connectors",
+          "parameters": [
+            "enableDataConnectors"
+          ]
+        },
+        {
+          "name": "Enable Content Hub Solutions",
+          "parameters": [
+            "enableSolutions1P",
+            "enableSolutionsEssentials",
+            "enableSolutionsTraining"
+          ]
+        },
+        {
+          "name": "Other Options",
+          "parameters": [
+            "enableUEBA"
+          ]
+        }
       ]
     }
-  ]
-},
+  },
   "resources": [
     {
       "name": "logAnalyticsDeployment",
@@ -237,5 +238,4 @@
       }
     }
   ]
-}
 }
