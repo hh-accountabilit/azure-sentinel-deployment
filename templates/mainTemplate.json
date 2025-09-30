@@ -175,36 +175,6 @@
         }
       }
     },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "name": "settings",
-            "apiVersion": "2020-06-01",
-            "dependsOn": [
-                "workspaceCreation"
-            ],
-            "resourceGroup": "[parameters('rgName')]",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/hh-accountabilit/Sentinel-Deployment/refs/heads/main/Deployment/Templates/settings.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspaceName": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "enableUeba": {
-                        "value": "[parameters('enableUeba')]"
-                    },
-                    "identityProviders": {
-                        "value": "[parameters('identityProviders')]"
-                    },
-                    "enableDiagnostics": {
-                        "value": "[parameters('enableDiagnostics')]"
-                    }
-                }
-            }
-        },
     {
       "name": "vmDeployment",
       "type": "Microsoft.Resources/deployments",
