@@ -56,79 +56,199 @@
       "metadata": {
         "description": "Select one or more data connectors to enable."
       }
+    },
+    "enableSolutions1P": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "MicrosoftThreatProtection",
+        "MicrosoftCloudAppSecurity",
+        "MicrosoftDefenderForIdentity"
+      ],
+      "metadata": {
+        "description": "First-party Microsoft solutions for Content Hub."
+      }
+    },
+    "enableSolutionsEssentials": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "EssentialsNetwork",
+        "EssentialsIdentity",
+        "EssentialsData"
+      ],
+      "metadata": {
+        "description": "Essential solution bundles for quick start."
+      }
+    },
+    "enableSolutionsTraining": {
+      "type": "array",
+      "defaultValue": [],
+      "allowedValues": [
+        "TrainingSimulatedThreats",
+        "TrainingHoneypots"
+      ],
+      "metadata": {
+        "description": "Simulated training environments and scenarios."
+      }
+    },
+    "enableUEBA": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Enable UEBA (User and Entity Behavior Analytics)."
+      }
     }
   },
   "formDefinition": {
     "name": "RootStep",
     "label": "Deployment Configuration",
-    "elements": [
+    "elements": [],
+    "steps": [
       {
-        "name": "location",
-        "type": "dropdown",
-        "label": "Location",
-        "defaultValue": "eastus",
-        "toolTip": "Select the Azure region for deployment",
-        "constraints": {
-          "allowedValues": [
-            "eastus",
-            "westus",
-            "centralus",
-            "westeurope",
-            "northeurope",
-            "southeastasia",
-            "australiaeast"
-          ]
-        }
-      },
-      {
-        "name": "pricingTier",
-        "type": "dropdown",
-        "label": "Pricing Tier",
-        "defaultValue": "PerGB2018",
-        "toolTip": "Pricing tier for Log Analytics workspace",
-        "constraints": {
-          "allowedValues": [
-            "CapacityReservation",
-            "Free",
-            "LACluster",
-            "PerGB2018",
-            "PerNode",
-            "Premium",
-            "Standalone",
-            "Standard"
-          ]
-        }
-      },
-      {
-        "name": "retentionInDays",
-        "type": "slider",
-        "label": "Retention (Days)",
-        "defaultValue": 30,
-        "minValue": 7,
-        "maxValue": 730,
-        "toolTip": "How many days to retain logs"
-      },
-      {
-        "name": "enableDataConnectors",
-        "type": "checkboxList",
-        "label": "Enable Data Connectors",
-        "toolTip": "Select one or more data connectors",
-        "options": [
+        "name": "workspaceConfig",
+        "label": "📄 Workspace Configuration",
+        "elements": [
           {
-            "label": "Azure Activity Log",
-            "value": "AzureActivityLog"
+            "name": "location",
+            "type": "dropdown",
+            "label": "Location",
+            "toolTip": "Select the Azure region for deployment",
+            "constraints": {
+              "allowedValues": [
+                "eastus",
+                "westus",
+                "centralus",
+                "westeurope",
+                "northeurope",
+                "southeastasia",
+                "australiaeast"
+              ]
+            }
           },
           {
-            "label": "Security Insights Event Collection",
-            "value": "SecurityInsightsSecurityEventCollectionConfiguration"
+            "name": "pricingTier",
+            "type": "dropdown",
+            "label": "Pricing Tier",
+            "toolTip": "Pricing tier for Log Analytics workspace",
+            "constraints": {
+              "allowedValues": [
+                "CapacityReservation",
+                "Free",
+                "LACluster",
+                "PerGB2018",
+                "PerNode",
+                "Premium",
+                "Standalone",
+                "Standard"
+              ]
+            }
           },
           {
-            "label": "Windows Firewall",
-            "value": "WindowsFirewall"
+            "name": "retentionInDays",
+            "type": "slider",
+            "label": "Retention (Days)",
+            "minValue": 7,
+            "maxValue": 730,
+            "toolTip": "How many days to retain logs"
+          }
+        ]
+      },
+      {
+        "name": "dataConnectors",
+        "label": "📊 Data Connectors",
+        "elements": [
+          {
+            "name": "enableDataConnectors",
+            "type": "dropdown",
+            "label": "Enable Data Connectors",
+            "toolTip": "Select one or more data connectors",
+            "constraints": {
+              "allowedValues": [
+                "AzureActivityLog",
+                "SecurityInsightsSecurityEventCollectionConfiguration",
+                "WindowsFirewall",
+                "DnsAnalytics"
+              ]
+            },
+            "options": [
+              {
+                "label": "Azure Activity Log",
+                "value": "AzureActivityLog"
+              },
+              {
+                "label": "Security Insights Event Collection",
+                "value": "SecurityInsightsSecurityEventCollectionConfiguration"
+              },
+              {
+                "label": "Windows Firewall",
+                "value": "WindowsFirewall"
+              },
+              {
+                "label": "DNS Analytics",
+                "value": "DnsAnalytics"
+              }
+            ],
+            "multiSelect": true
+          }
+        ]
+      },
+      {
+        "name": "contentHubSolutions",
+        "label": "🧩 Content Hub Solutions",
+        "elements": [
+          {
+            "name": "enableSolutions1P",
+            "type": "dropdown",
+            "label": "Microsoft First-Party Solutions",
+            "toolTip": "Select Microsoft first-party solutions",
+            "constraints": {
+              "allowedValues": [
+                "MicrosoftThreatProtection",
+                "MicrosoftCloudAppSecurity",
+                "MicrosoftDefenderForIdentity"
+              ]
+            },
+            "multiSelect": true
           },
           {
-            "label": "DNS Analytics",
-            "value": "DnsAnalytics"
+            "name": "enableSolutionsEssentials",
+            "type": "dropdown",
+            "label": "Essentials Solution Bundles",
+            "toolTip": "Select essential solution bundles",
+            "constraints": {
+              "allowedValues": [
+                "EssentialsNetwork",
+                "EssentialsIdentity",
+                "EssentialsData"
+              ]
+            },
+            "multiSelect": true
+          },
+          {
+            "name": "enableSolutionsTraining",
+            "type": "dropdown",
+            "label": "Training Solutions",
+            "toolTip": "Select training scenarios",
+            "constraints": {
+              "allowedValues": [
+                "TrainingSimulatedThreats",
+                "TrainingHoneypots"
+              ]
+            },
+            "multiSelect": true
+          }
+        ]
+      },
+      {
+        "name": "otherOptions",
+        "label": "🛡️ Other Options",
+        "elements": [
+          {
+            "name": "enableUEBA",
+            "type": "checkbox",
+            "label": "Enable UEBA",
+            "toolTip": "Enable UEBA (User and Entity Behavior Analytics)"
           }
         ]
       }
