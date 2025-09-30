@@ -297,7 +297,6 @@
             "defaultValue": [],
             "constraints": {
               "allowedValues": [
-                // Populate with your available Training solutions here
               ]
             }
           },
@@ -311,7 +310,6 @@
             "defaultValue": [],
             "constraints": {
               "allowedValues": [
-                // Populate with your available Essentials solutions here
               ]
             }
           }
