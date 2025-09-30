@@ -91,38 +91,7 @@
       }
     }
   },
-  "metadata": {
-    "parameterGroups": [
-      {
-        "name": "Workspace Configuration",
-        "parameters": [
-          "location",
-          "retentionInDays",
-          "pricingTier"
-        ]
-      },
-      {
-        "name": "Enable Data Connectors",
-        "parameters": [
-          "enableDataConnectors"
-        ]
-      },
-      {
-        "name": "Enable Content Hub Solutions",
-        "parameters": [
-          "enableSolutions1P",
-          "enableSolutionsEssentials",
-          "enableSolutionsTraining"
-        ]
-      },
-      {
-        "name": "Other Options",
-        "parameters": [
-          "enableUEBA"
-        ]
-      }
-    ]
-  },
+
   "resources": [
     {
       "name": "logAnalyticsDeployment",
