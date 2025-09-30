@@ -26,23 +26,6 @@
         "description": "Pricing tier for the workspace."
       }
     },
-    "capacityReservation": {
-      "type": "int",
-      "allowedValues": [
-        100,
-        200,
-        300,
-        400,
-        500,
-        1000,
-        2000,
-        5000
-      ],
-      "defaultValue": 100,
-      "metadata": {
-        "description": "Commitment tier"
-      }
-    },
     "dailyQuota": {
       "type": "int",
       "metadata": {
@@ -278,8 +261,7 @@
                 { "label": "Service Principal Risk Events (Preview)", "value": "ServicePrincipalRiskEvents" }
               ],
               "required": false
-            },
-            "visible": "[if(contains(parameters('enableDataConnectors'),'AzureActiveDirectory'), true, false)]"
+            }
           }
         ]
       },
