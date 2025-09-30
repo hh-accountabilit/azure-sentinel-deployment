@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.SecurityInsights/workspaces/onboardingStates",
+      "apiVersion": "2022-01-01-preview",
+      "name": "log-workspace/default",
+      "location": "[parameters('location')]",
+      "properties": {
+        "isEnabled": true
+      }
+    },
+    {
+      "type": "Microsoft.SecurityInsights/uebaSettings",
+      "apiVersion": "2022-12-01-preview",
+      "name": "log-workspace/Default",
+      "properties": {
+        "enabled": true
+      }
+    }
+  ]
+}
