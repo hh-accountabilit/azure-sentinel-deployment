@@ -149,7 +149,6 @@
             "defaultValue": "PerGB2018",
             "constraints": {
               "allowedValues": [
-                "CapacityReservation",
                 "Free",
                 "LACluster",
                 "PerGB2018",
