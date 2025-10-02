@@ -9,97 +9,74 @@
         "description": "Location for all resources."
       }
     },
-        "pricingTier": {
-            "type": "string",
-            "metadata": {
-                "description": "Pricing tier: pergb2018 or legacy tiers (Free, Standalone, PerNode, Standard or Premium) which are not available to all customers."
-            },
-            "allowedValues": [
-                "CapacityReservation",
-                "Free",
-                "LACluster",
-                "PerGB2018",
-                "PerNode",
-                "Premium",
-                "Standalone",
-                "Standard"
-            ],
-            "defaultValue": "PerGB2018"
-        },
-        "capacityReservation": {
-            "type": "int",
-            "metadata": {
-                "description": "Commitment tier"
-            },
-            "allowedValues": [
-                100,
-                200,
-                300,
-                400,
-                500,
-                1000,
-                2000,
-                5000
-            ],
-            "defaultValue": 100
-        },
-        "dailyQuota": {
-            "type": "int",
-            "metadata": {
-                "description": "Daily ingestion limit in GBs. This limit doesn't apply to the following tables: SecurityAlert, SecurityBaseline, SecurityBaselineSummary, SecurityDetection, SecurityEvent, WindowsFirewall, MaliciousIPCommunication, LinuxAuditLog, SysmonEvent, ProtectionStatus, WindowsEvent"
-            }
-        },
-        "dataRetention": {
-            "type": "int",
-            "minValue": 7,
-            "maxValue": 730,
-            "metadata": {
-                "description": "Number of days of retention."
-            },
-            "defaultValue": 180
-        },
-        "enableDataConnectors": {
-            "type": "array",
-            "metadata": {
-                "description": "The kind of data connectors that can be deployed via ARM templates are the following: [\"AzureActivityLog\",\"SecurityInsightsSecurityEventCollectionConfiguration\",\"WindowsFirewall\",\"DnsAnalytics\"], Reference: https://docs.microsoft.com/azure/templates/microsoft.operationalinsights/2020-03-01-preview/workspaces/datasources#microsoftoperationalinsightsworkspacesdatasources-object"
-            },
-            "defaultValue": []
-        },
-        "enableSolutionsTraining": {
-            "type": "array",
-            "metadata": {
-                "description": "The list of Content Hub Training solutions to deploy."
-            },
-            "defaultValue": []
-        },
-                "enableSolutionsEssentials": {
-            "type": "array",
-            "metadata": {
-                "description": "The list of Content Hub Essentials solutions to deploy."
-            },
-            "defaultValue": []
-        },
-                "aadStreams": {
-            "type": "array",
-            "metadata": {
-                "description": "The list of data types to enable for Azure AD connector"
-            },
-            "defaultValue": []
-        },
+    "pricingTier": {
+      "type": "string",
+      "defaultValue": "PerGB2018",
+      "allowedValues": [
+        "Free", "LACluster", "PerGB2018", "PerNode", "Premium", "Standalone", "Standard"
+      ],
+      "metadata": {
+        "description": "Log Analytics pricing tier."
+      }
+    },
+    "dailyQuota": {
+      "type": "int",
+      "defaultValue": 0,
+      "metadata": {
+        "description": "Daily ingestion limit in GBs. Leave 0 for unlimited."
+      }
+    },
+    "dataRetention": {
+      "type": "int",
+      "defaultValue": 180,
+      "minValue": 7,
+      "maxValue": 730,
+      "metadata": {
+        "description": "Retention in days for Log Analytics data."
+      }
+    },
+    "enableDataConnectors": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Data connectors to deploy."
+      }
+    },
+    "aadStreams": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "AAD data streams to enable."
+      }
+    },
+    "enableSolutionsEssentials": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Content Hub Essentials solutions to deploy."
+      }
+    },
+    "enableSolutionsTraining": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Content Hub Training solutions to deploy."
+      }
+    },
     "enableUEBA": {
       "type": "bool",
       "defaultValue": true,
       "metadata": {
-        "description": "Enable UEBA (User and Entity Behavior Analytics)."
+        "description": "Enable User and Entity Behavior Analytics."
       }
     },
-            "identityProviders": {
-            "type": "array",
-            "metadata": {
-                "description": "Array of identity providers to be synched with UEBA. Valid identity providers are 'ActiveDirectory' and 'AzureActiveDirectory'"
-            },
-            "defaultValue": []
-        }
+    "identityProviders": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "UEBA identity providers (ActiveDirectory, AzureActiveDirectory)."
+      }
+    }
   },
   "resources": [
     {
@@ -113,15 +90,10 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "location": {
-            "value": "[parameters('location')]"
-          },
-          "retentionInDays": {
-            "value": "[parameters('dataRetention')]"
-          },
-          "pricingTier": {
-            "value": "[parameters('pricingTier')]"
-          }
+          "location": { "value": "[parameters('location')]" },
+          "retentionInDays": { "value": "[parameters('dataRetention')]" },
+          "pricingTier": { "value": "[parameters('pricingTier')]" },
+          "dailyQuota": { "value": "[parameters('dailyQuota')]" }
         }
       }
     },
@@ -129,9 +101,7 @@
       "name": "sentinelDeployment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2021-04-01",
-      "dependsOn": [
-        "logAnalyticsDeployment"
-      ],
+      "dependsOn": [ "logAnalyticsDeployment" ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -139,15 +109,11 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "location": {
-            "value": "[parameters('location')]"
-          },
+          "location": { "value": "[parameters('location')]" },
           "workspaceName": {
             "value": "[reference('logAnalyticsDeployment').outputs.workspaceName.value]"
           },
-          "retentionInDays": {
-            "value": "[parameters('dataRetention')]"
-          }
+          "retentionInDays": { "value": "[parameters('dataRetention')]" }
         }
       }
     },
@@ -156,9 +122,7 @@
       "name": "dataConnectorsDeployment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2021-04-01",
-      "dependsOn": [
-        "sentinelDeployment"
-      ],
+      "dependsOn": [ "sentinelDeployment" ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -169,9 +133,7 @@
           "dataConnectorsKind": {
             "value": "[parameters('enableDataConnectors')]"
           },
-          "location": {
-            "value": "[parameters('location')]"
-          }
+          "location": { "value": "[parameters('location')]" }
         }
       }
     },
@@ -179,9 +141,7 @@
       "name": "vmDeployment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2021-04-01",
-      "dependsOn": [
-        "sentinelDeployment"
-      ],
+      "dependsOn": [ "sentinelDeployment" ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -189,9 +149,7 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "location": {
-            "value": "[parameters('location')]"
-          }
+          "location": { "value": "[parameters('location')]" }
         }
       }
     },
@@ -199,9 +157,7 @@
       "name": "defenderDeployment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2021-04-01",
-      "dependsOn": [
-        "vmDeployment"
-      ],
+      "dependsOn": [ "vmDeployment" ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -209,11 +165,15 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "location": {
-            "value": "[parameters('location')]"
-          }
+          "location": { "value": "[parameters('location')]" }
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+    "workspaceName": {
+      "type": "string",
+      "value": "[reference('logAnalyticsDeployment').outputs.workspaceName.value]"
+    }
+  }
 }
