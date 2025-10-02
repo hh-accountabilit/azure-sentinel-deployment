@@ -128,7 +128,7 @@
                     ],
                     "required": true
                 },
-                "visible": "[if(equals(basics('pricingTier'),'CapacityReservation'), true, false)]"
+                "visible": "[equals(parameters('pricingTier'), 'CapacityReservation')]"
             }
           ],
     "steps": [
@@ -222,3 +222,4 @@
     }
   }
 }
+
