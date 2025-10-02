@@ -12,7 +12,7 @@
         "toolTip": "Select the Azure region for the resources."
       }
     ],
-    "steps": [
+    "tabs": [
       {
         "name": "generalSettings",
         "label": "General Settings",
@@ -143,3 +143,4 @@
     }
   }
 }
+
