@@ -556,9 +556,6 @@
             "enableDataConnectors": "[steps('dataConnectors').enableDataConnectors]",
             "aadStreams": "[steps('dataConnectors').aadStreams]",
             "location": "[location()]",
-            "enableMLAlerts": "[steps('analyticsRules').enableMLAlerts]",
-            "enableScheduledAlerts": "[steps('analyticsRules').enableScheduledAlerts]",
-            "severityLevels": "[steps('analyticsRules').severityLevels]",
             "rgName": "[basics('rgName')]"
         }
     }
