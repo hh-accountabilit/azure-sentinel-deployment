@@ -292,6 +292,23 @@
                     }
                 }
             }
-        }
+        },
+        {
+  "condition": "[contains(parameters('dataConnectorsKind'), 'MicrosoftDefenderForIdentity')]",
+  "type": "Microsoft.OperationalInsights/workspaces/providers/dataConnectors",
+  "apiVersion": "2020-01-01",  
+  "location": "[parameters('location')]",
+  "name": "[concat(parameters('workspaceName'), '/Microsoft.SecurityInsights/DefenderForIdentityConnector')]",
+  "kind": "AzureActiveDirectoryIdentityProtection",  // or correct kind if different
+  "properties": {
+    "tenantId": "[parameters('tenantId')]",
+    "dataTypes": {
+      "alerts": {
+        "state": "enabled"
+      }
+    }
+  }
+}
+
     ]
 }
