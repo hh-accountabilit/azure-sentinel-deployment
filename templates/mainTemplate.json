@@ -241,7 +241,7 @@
         },
         {
             "condition": "[or(not(empty(parameters('enableSolutions1P'))),not(empty(parameters('enableSolutionsEssentials'))),not(empty(parameters('enableSolutionsTraining'))))]",
-            "name": "enableSolutionsAndAlerts",
+            "name": "enableSolutions",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-06-01",
             "resourceGroup": "[parameters('rgName')]",
@@ -252,7 +252,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/templates/solutionsAndAlerts.json",
+                    "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/templates/solutions.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -267,12 +267,6 @@
                     },
                     "workspaceName": {
                         "value": "[parameters('workspaceName')]"
-                    },
-                    "severityLevels": {
-                        "value": "[replace(replace(string(parameters('severityLevels')),'[',''),']','')]"
-                    },
-                    "enableAlerts": {
-                        "value": "[parameters('enableScheduledAlerts')]"
                     },
                     "location": {
                         "value": "[parameters('location')]"
