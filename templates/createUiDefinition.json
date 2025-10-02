@@ -13,130 +13,72 @@
       }
     ],
     "steps": [
-  {
-    "name": "generalSettings",
-    "label": "General Settings",
-    "elements": [
       {
-        "name": "enableDataConnectors",
-        "type": "Microsoft.Common.MultiSelect",
-        "label": "Enable Data Connectors",
-        "toolTip": "Select which data connectors to enable.",
-        "defaultValue": [],
-        "constraints": {
-          "allowedValues": [
-            { "label": "AzureActivityLog", "value": "AzureActivityLog" },
-            { "label": "SecurityInsightsSecurityEventCollectionConfiguration", "value": "SecurityInsightsSecurityEventCollectionConfiguration" },
-            { "label": "WindowsFirewall", "value": "WindowsFirewall" },
-            { "label": "DnsAnalytics", "value": "DnsAnalytics" }
-          ]
-        }
-      },
-      {
-        "name": "aadStreams",
-        "type": "Microsoft.Common.MultiSelect",
-        "label": "Azure AD Data Streams",
-        "defaultValue": [],
-        "toolTip": "Select AAD stream types to collect."
-      },
-      {
-        "name": "enableSolutionsEssentials",
-        "type": "Microsoft.Common.MultiSelect",
-        "label": "Essentials Solutions",
-        "defaultValue": []
-      },
-      {
-        "name": "enableSolutionsTraining",
-        "type": "Microsoft.Common.MultiSelect",
-        "label": "Training Solutions",
-        "defaultValue": []
-      },
-      {
-        "name": "enableUEBA",
-        "type": "Microsoft.Common.Switch",
-        "label": "Enable UEBA",
-        "defaultValue": true
-      },
-      {
-        "name": "identityProviders",
-        "type": "Microsoft.Common.MultiSelect",
-        "label": "Identity Providers",
-        "toolTip": "Identity providers to sync with UEBA.",
-        "defaultValue": [],
-        "constraints": {
-          "allowedValues": [
-            { "label": "ActiveDirectory", "value": "ActiveDirectory" },
-            { "label": "AzureActiveDirectory", "value": "AzureActiveDirectory" }
-          ]
-        },
-        "visibleRule": "[parameters('enableUEBA')]"
-      }
-    ]
-  },
-  {
-    "name": "logAnalyticsSettings",
-    "label": "Log Analytics Settings",
-    "elements": [
-      {
-        "name": "pricingTier",
-        "type": "Microsoft.Common.DropDown",
-        "label": "Pricing Tier",
-        "defaultValue": "PerGB2018",
-        "toolTip": "Choose the pricing tier.",
-        "constraints": {
-          "allowedValues": [
-            { "label": "CapacityReservation", "value": "CapacityReservation" },
-            { "label": "Free", "value": "Free" },
-            { "label": "LACluster", "value": "LACluster" },
-            { "label": "PerGB2018", "value": "PerGB2018" },
-            { "label": "PerNode", "value": "PerNode" },
-            { "label": "Premium", "value": "Premium" },
-            { "label": "Standalone", "value": "Standalone" },
-            { "label": "Standard", "value": "Standard" }
-          ]
-        }
-      },
-      {
-        "name": "dailyQuota",
-        "type": "Microsoft.Common.TextBox",
-        "label": "Daily Quota (GB)",
-        "toolTip": "Daily ingestion limit. Leave blank for no limit."
-      },
-      {
-        "name": "dataRetention",
-        "type": "Microsoft.Common.TextBox",
-        "label": "Data Retention (days)",
-        "defaultValue": "180",
-        "constraints": {
-          "regex": "^(7|[8-9]|[1-9][0-9]{1,2}|[1-6][0-9]{2}|7[0-2][0-9]|730)$",
-          "validationMessage": "Must be between 7 and 730 days."
-        }
-      }
-    ]
-      },
-      {
-  "name": "enableDataConnectors",
-  "type": "Microsoft.Common.MultiSelect",
-  "label": "Enable Data Connectors",
-  "toolTip": "Select one or more data connectors to deploy. You may leave it empty if none are needed.",
-  "defaultValue": [],
-  "constraints": {
-    "allowedValues": [
-      { "label": "Azure Activity Log", "value": "AzureActivityLog" },
-      { "label": "Security Event Collection", "value": "SecurityInsightsSecurityEventCollectionConfiguration" },
-      { "label": "Windows Firewall", "value": "WindowsFirewall" },
-      { "label": "DNS Analytics", "value": "DnsAnalytics" }
-    ],
-    "required": false,
-    "selectionLimit": 3
-  }
-},
+        "name": "generalSettings",
+        "label": "General Settings",
+        "elements": [
+          {
+            "name": "enableDataConnectors",
+            "type": "Microsoft.Common.MultiSelect",
+            "label": "Enable Data Connectors",
+            "toolTip": "Select which data connectors to enable.",
+            "defaultValue": [],
+            "constraints": {
+              "allowedValues": [
+                { "label": "Azure Activity Log", "value": "AzureActivityLog" },
+                { "label": "Security Event Collection", "value": "SecurityInsightsSecurityEventCollectionConfiguration" },
+                { "label": "Windows Firewall", "value": "WindowsFirewall" },
+                { "label": "DNS Analytics", "value": "DnsAnalytics" }
+              ],
+              "required": false
+            }
+          },
           {
             "name": "aadStreams",
             "type": "Microsoft.Common.MultiSelect",
             "label": "Azure AD Data Streams",
             "defaultValue": [],
             "toolTip": "Select AAD stream types to collect."
+          }
+        ]
+      },
+      {
+        "name": "logAnalyticsSettings",
+        "label": "Log Analytics Settings",
+        "elements": [
+          {
+            "name": "pricingTier",
+            "type": "Microsoft.Common.DropDown",
+            "label": "Pricing Tier",
+            "defaultValue": "PerGB2018",
+            "toolTip": "Choose the pricing tier.",
+            "constraints": {
+              "allowedValues": [
+                { "label": "Free", "value": "Free" },
+                { "label": "LACluster", "value": "LACluster" },
+                { "label": "PerGB2018", "value": "PerGB2018" },
+                { "label": "PerNode", "value": "PerNode" },
+                { "label": "Premium", "value": "Premium" },
+                { "label": "Standalone", "value": "Standalone" },
+                { "label": "Standard", "value": "Standard" }
+              ]
+            }
+          },
+          {
+            "name": "dailyQuota",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Daily Quota (GB)",
+            "toolTip": "Daily ingestion limit. Leave blank for no limit."
+          },
+          {
+            "name": "dataRetention",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Data Retention (days)",
+            "defaultValue": "180",
+            "constraints": {
+              "regex": "^(7|[8-9]|[1-9][0-9]{1,2}|[1-6][0-9]{2}|7[0-2][0-9]|730)$",
+              "validationMessage": "Must be between 7 and 730 days."
+            }
           }
         ]
       },
@@ -190,7 +132,6 @@
     "outputs": {
       "location": "[location()]",
       "pricingTier": "[parameters('pricingTier')]",
-      "capacityReservation": "[parameters('capacityReservation')]",
       "dailyQuota": "[parameters('dailyQuota')]",
       "dataRetention": "[parameters('dataRetention')]",
       "enableDataConnectors": "[parameters('enableDataConnectors')]",
