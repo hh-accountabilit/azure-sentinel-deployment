@@ -55,13 +55,6 @@
             },
             "defaultValue": []
         },
-        "severityLevels": {
-            "type": "array",
-            "metadata": {
-                "description": "Severity levels desired for Analytics Rules"
-            },
-            "defaultValue": []
-        },
         "dailyQuota": {
             "type": "int",
             "metadata": {
@@ -75,7 +68,7 @@
             "metadata": {
                 "description": "Number of days of retention. Workspaces in the legacy Free pricing tier can only have 7 days."
             },
-            "defaultValue": 90
+            "defaultValue": 180
         },
         "immediatePurgeDataOn30Days": {
             "type": "bool",
@@ -128,20 +121,6 @@
         },
         "enableDiagnostics": {
             "type": "bool"
-        },
-        "enableMLAlerts": {
-            "type": "bool",
-            "metadata": {
-                "description": "Enable ML Behavior Analytics rules"
-            },
-            "defaultValue": false
-        },
-        "enableScheduledAlerts": {
-            "type": "bool",
-            "metadata": {
-                "description": "Enable Scheduled analytics rules"
-            },
-            "defaultValue": false
         }
     },
     "variables": {},
