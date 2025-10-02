@@ -11,8 +11,7 @@
         "location": {
           "label": "Location",
           "visible": true
-          /* Optionally restrict locations:
-          "allowedValues": [ "eastus", "westus3", "centralus" ] */
+          "allowedValues": [ "eastus", "westus3", "centralus" ]
         }
       }
     },
@@ -243,3 +242,4 @@
     }
   }
 }
+
