@@ -67,7 +67,7 @@
                 "placeholder": "",
                 "multiselect": false,
                 "toolTip": "Visit [Azure Monitor Pricing page](https://azure.microsoft.com/pricing/details/monitor/) for more information.",
-                "defaultValue": [{"value": "PerGB2018"}],
+                "defaultValue": "PerGB2018",
                 "constraints": {
                     "allowedValues": [
                         {
@@ -222,4 +222,5 @@
     }
   }
 }
+
 
