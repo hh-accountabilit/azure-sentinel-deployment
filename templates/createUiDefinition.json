@@ -97,24 +97,6 @@
         }
       },
       {
-        "name": "capacityReservation",
-        "type": "Microsoft.Common.DropDown",
-        "label": "Capacity Reservation (GB)",
-        "defaultValue": 100,
-        "constraints": {
-          "allowedValues": [
-            { "label": "100", "value": 100 },
-            { "label": "200", "value": 200 },
-            { "label": "300", "value": 300 },
-            { "label": "400", "value": 400 },
-            { "label": "500", "value": 500 },
-            { "label": "1000", "value": 1000 },
-            { "label": "2000", "value": 2000 },
-            { "label": "5000", "value": 5000 }
-          ]
-        }
-      },
-      {
         "name": "dailyQuota",
         "type": "Microsoft.Common.TextBox",
         "label": "Daily Quota (GB)",
@@ -133,24 +115,22 @@
     ]
       },
       {
-        "name": "connectorsSettings",
-        "label": "Data Connectors",
-        "elements": [
-          {
-            "name": "enableDataConnectors",
-            "type": "Microsoft.Common.MultiSelect",
-            "label": "Enable Data Connectors",
-            "defaultValue": [],
-            "toolTip": "Select which data connectors to enable.",
-            "constraints": {
-              "allowedValues": [
-                { "label": "AzureActivityLog", "value": "AzureActivityLog" },
-                { "label": "SecurityInsightsSecurityEventCollectionConfiguration", "value": "SecurityInsightsSecurityEventCollectionConfiguration" },
-                { "label": "WindowsFirewall", "value": "WindowsFirewall" },
-                { "label": "DnsAnalytics", "value": "DnsAnalytics" }
-              ]
-            }
-          },
+  "name": "enableDataConnectors",
+  "type": "Microsoft.Common.MultiSelect",
+  "label": "Enable Data Connectors",
+  "toolTip": "Select one or more data connectors to deploy. You may leave it empty if none are needed.",
+  "defaultValue": [],
+  "constraints": {
+    "allowedValues": [
+      { "label": "Azure Activity Log", "value": "AzureActivityLog" },
+      { "label": "Security Event Collection", "value": "SecurityInsightsSecurityEventCollectionConfiguration" },
+      { "label": "Windows Firewall", "value": "WindowsFirewall" },
+      { "label": "DNS Analytics", "value": "DnsAnalytics" }
+    ],
+    "required": false,
+    "selectionLimit": 3
+  }
+},
           {
             "name": "aadStreams",
             "type": "Microsoft.Common.MultiSelect",
