@@ -252,7 +252,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/solutions.json",
+                    "uri": "https://raw.githubusercontent.com/hh-accountabilit/azure-sentinel-deployment/main/templates/hubSolutions.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
