@@ -209,7 +209,7 @@
             "resourceGroup": "[parameters('rgName')]",
             "dependsOn": [
                 "workspaceCreation",
-                "enableSolutionsAndAlerts"
+                "enableSolutions"
             ],
             "properties": {
                 "mode": "Incremental",
