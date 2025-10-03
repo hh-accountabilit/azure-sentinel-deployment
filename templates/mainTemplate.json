@@ -209,7 +209,7 @@
             "resourceGroup": "[parameters('rgName')]",
             "dependsOn": [
                 "workspaceCreation",
-                "enableSolutions"
+                "enableHubSolutions"
             ],
             "properties": {
                 "mode": "Incremental",
